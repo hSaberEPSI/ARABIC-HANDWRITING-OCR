@@ -1,0 +1,43 @@
+# config.yaml
+
+# Général
+project_name: "arabic_handwriting_ocr"
+random_seed: 42
+log_level: "INFO"
+
+# Données
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  augmented_dir: "data/augmented"
+  output_csv: "data/processed/labels.csv"
+  image_format: "png"
+  image_size: [128, 32]  # (width, height)
+
+# Prétraitement
+preprocessing:
+  grayscale: true
+  binarize: true
+  invert_colors: true
+  normalize: true
+  deskew: true
+  remove_noise: true
+
+# Entraînement
+training:
+  model_type: "crnn"  # crnn, trocr, donut
+  batch_size: 64
+  epochs: 50
+  learning_rate: 0.001
+  validation_split: 0.1
+  use_scheduler: true
+
+# Modèle
+model:
+  save_dir: "experiments/crnn_baseline"
+  save_format: "pt"
+
+# Inference
+inference:
+  model_path: "experiments/crnn_baseline/best_model.pt"
+  image_input_path: "example.png"
